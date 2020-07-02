@@ -1,0 +1,225 @@
+databaseChangeLog:
+  - changeSet:
+      id: auth
+      author: AH
+      preConditions:
+        onFail: MARK_RAN
+        not:
+          tableExists:
+            schemaName: ecommerceapp
+            tableName: customer
+      changes:
+        - sql:
+            sql: create schema IF NOT EXISTS ecommerceapp
+            dbms: ecommerceapp
+        - createTable:
+            tableName: product_category
+            schemaName: ecommerceapp
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: category_name
+                  type: varchar(255)
+
+        - createTable:
+            tableName: product
+            schemaName: ecommerceapp
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sku
+                  type: varchar(255)
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: unit_price
+                  type: decimal(13,2)
+              - column:
+                  name: image_url
+                  type: varchar(255)
+              - column:
+                  name: active
+                  type: boolean
+              - column:
+                  name: units_in_stock
+                  type: int(11)
+              - column:
+                  name: date_created
+                  type: datetime(6)
+              - column:
+                  name: last_updated
+                  type: datetime(6)
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_product_category
+                    references: ecommerceapp.product_category(id)
+  - changeSet:
+      id:  insert-example1
+      author:  liquibase-docs
+      changes:
+        - insert:
+            catalogName:  product
+            columns:
+              - column:
+                  name:  id
+                  value: 1
+              - column:
+                  name:  category_name
+                  value: BOOKS
+            schemaName:  ecommerceapp
+            tableName:  product_category
+
+  - changeSet:
+      id:  insert-example2
+      author:  liquibase-docs
+      changes:
+        - insert:
+            catalogName:  product
+            columns:
+              - column:
+                  name:  id
+                  value: 419a03b0-5e0b-4054-aeb7-3e910d048fb8
+              - column:
+                  name:  sku
+                  value: BOOK-TECH-1000
+              - column:
+                  name:  name
+                  value: JavaScript - The Fun Parts
+              - column:
+                  name:  description
+                  value: Learn JavaScript
+              - column:
+                  name:  unit_price
+                  value: 19.99
+              - column:
+                  name:  image_url
+                  value: assets/images/products/placeholder.png
+              - column:
+                  name:  active
+                  value: 1
+              - column:
+                  name:  units_in_stock
+                  value: 100
+              - column:
+                  name:  category_id
+                  value: 1
+            schemaName:  ecommerceapp
+            tableName:  product
+
+  - changeSet:
+      id:  insert-example3
+      author:  liquibase-docs
+      changes:
+        - insert:
+            catalogName:  product
+            columns:
+              - column:
+                  name:  id
+                  value: 770089e9-4335-4e65-89f2-9e6e29c4e8a5
+              - column:
+                  name:  sku
+                  value: BOOK-TECH-1001
+              - column:
+                  name:  name
+                  value: Spring Framework Tutorial
+              - column:
+                  name:  description
+                  value: Learn Spring
+              - column:
+                  name:  unit_price
+                  value: 29.99
+              - column:
+                  name:  image_url
+                  value: assets/images/products/placeholder.png
+              - column:
+                  name:  active
+                  value: 1
+              - column:
+                  name:  units_in_stock
+                  value: 100
+              - column:
+                  name:  category_id
+                  value: 1
+            schemaName:  ecommerceapp
+            tableName:  product
+        - insert:
+            catalogName:  product
+            columns:
+              - column:
+                  name:  id
+                  value: f2aa1944-87e8-4f60-af13-94e9937e4e70
+              - column:
+                  name:  sku
+                  value: BOOK-TECH-1003
+              - column:
+                  name:  name
+                  value: Internet of Things (IoT) - Getting Started
+              - column:
+                  name:  description
+                  value: Learn IoT
+              - column:
+                  name:  unit_price
+                  value: 29.99
+              - column:
+                  name:  image_url
+                  value: assets/images/products/placeholder.png
+              - column:
+                  name:  active
+                  value: 1
+              - column:
+                  name:  units_in_stock
+                  value: 100
+              - column:
+                  name:  category_id
+                  value: 1
+            schemaName:  ecommerceapp
+            tableName:  product
+        - insert:
+            catalogName:  product
+            columns:
+              - column:
+                  name:  id
+                  value: 284cb4e0-2de8-4ae6-8333-1c5f89e9916d
+              - column:
+                  name:  sku
+                  value: BOOK-TECH-1003
+              - column:
+                  name:  name
+                  value: The Go Programming Language A to Z
+              - column:
+                  name:  description
+                  value: Learn Go
+              - column:
+                  name:  unit_price
+                  value: 24.99
+              - column:
+                  name:  image_url
+                  value: assets/images/products/placeholder.png
+              - column:
+                  name:  active
+                  value: 1
+              - column:
+                  name:  units_in_stock
+                  value: 100
+              - column:
+                  name:  category_id
+                  value: 1
+            schemaName:  ecommerceapp
+            tableName:  product
